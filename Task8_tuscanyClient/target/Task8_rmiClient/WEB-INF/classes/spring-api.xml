@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <context:property-placeholder location="classpath:fileUpload.properties,classpath:sms.properties" ignore-unresolvable="true"/>
+
+    <bean id="smsApi" class="com.jnshu.util.SMSTest">
+        <property name="serverIP" value="${sms.serverIP}"/>
+        <property name="serverPort" value="${sms.serverPort}"/>
+        <property name="accountSid" value="${sms.accountSid}"/>
+        <property name="accountToken" value="${sms.accountToken}"/>
+        <property name="appID" value="${sms.appID}"/>
+    </bean>
+
+    <bean id="fileUpload" class="com.jnshu.util.FileUploadTest">
+        <constructor-arg name="ACCESS_KEY" value="${upload.accesskey}"/>
+        <constructor-arg name="SECRET_KEY" value="${upload.secretkey}"/>
+        <constructor-arg name="bucketname" value="${upload.bucketname}"/>
+    </bean>
+</beans>

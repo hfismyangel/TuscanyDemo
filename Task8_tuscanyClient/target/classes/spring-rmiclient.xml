@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- spring支持RMI的代理工厂类-->
+    <bean id="studentService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <!-- 指定url和接口-->
+        <property name="serviceUrl" value="rmi://139.199.105.238:8081/studentService" />
+        <property name="serviceInterface"
+                  value="com.jnshu.service.StudentService" />
+    </bean>
+    <bean id="developerService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://139.199.105.238:8081/developerService" />
+        <property name="serviceInterface"
+                  value="com.jnshu.service.DeveloperService" />
+    </bean>
+
+    <bean id="loginService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://139.199.105.238:8081/loginService" />
+        <property name="serviceInterface"
+                  value="com.jnshu.service.LoginService" />
+    </bean>
+
+    <bean id="cacheService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://139.199.105.238:8081/cacheService" />
+        <property name="serviceInterface"
+                  value="com.jnshu.service.CacheUtil" />
+    </bean>
+
+</beans>
