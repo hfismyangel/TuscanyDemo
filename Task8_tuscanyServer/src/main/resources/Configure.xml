@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases> 
+        <typeAlias alias="Student" type="com.jnshu.pojo.Student"/>
+        <typeAlias alias="Developer" type="com.jnshu.pojo.Developer"/>
+        <typeAlias alias="User" type="com.jnshu.pojo.User"></typeAlias>
+        <!-- 别名，对应映射文件中的Student别名 -->
+    </typeAliases> 
+
+ <!--     <environments default="development">
+        <environment id="development">
+        <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+            <property name="driver" value="com.mysql.jdbc.Driver"/>
+            <property name="url" value="jdbc:mysql://127.0.0.1:3306/xiuzhenyuan" />
+            <property name="username" value="root"/>
+            <property name="password" value="csk110110"/>
+            </dataSource>
+        </environment>
+    </environments>
+    --><!-- 与spring整合后可在spring配置文件中配置数据库 -->
+    <mappers>
+        
+        <mapper resource="StudentMapper.xml" />
+        <mapper resource="developerMapper.xml"/>
+        <mapper resource="loginMapper.xml"/>
+    </mappers>
+</configuration>

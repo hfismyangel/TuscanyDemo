@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="studentService" class="com.jnshu.serviceImpl.StudentServiceImpl"/>
+    <bean id="service1" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="studentService"/>
+        <property name="service" ref="studentService"/>
+        <property name="serviceInterface"
+                  value="com.jnshu.service.StudentService"/>
+        <property name="registryPort" value="8083"/>
+        <property name="servicePort" value="8089"/>
+    </bean>
+
+    <bean id="developerService" class="com.jnshu.serviceImpl.DeveloperServiceImpl"/>
+    <bean id="service2" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <!-- 配置自定义serviceName-->
+        <property name="serviceName" value="developerService"/>
+        <!-- RMI服务，ref引用接口的实现类-->
+        <property name="service" ref="developerService"/>
+        <!-- RMI服务，声明接口-->
+        <property name="serviceInterface"
+                  value="com.jnshu.service.DeveloperService"/>
+        <property name="registryPort" value="8083"/>
+        <property name="servicePort" value="8089"/>
+    </bean>
+
+    <bean id="loginService" class="com.jnshu.serviceImpl.LoginServiceImpl"/>
+    <bean id="service3" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <!-- 配置自定义serviceName-->
+        <property name="serviceName" value="loginService"/>
+        <!-- RMI服务，ref引用接口的实现类-->
+        <property name="service" ref="loginService"/>
+        <!-- RMI服务，声明接口-->
+        <property name="serviceInterface"
+                  value="com.jnshu.service.LoginService"/>
+        <property name="registryPort" value="8083"/>
+        <property name="servicePort" value="8089"/>
+    </bean>
+
+
+    <bean id="cacheService" class="com.jnshu.serviceImpl.CacheUtilImpl"/>
+    <bean id="service4" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <!-- 配置自定义serviceName-->
+        <property name="serviceName" value="cacheService"/>
+        <!-- RMI服务，ref引用接口的实现类-->
+        <property name="service" ref="cacheService"/>
+        <!-- RMI服务，声明接口-->
+        <property name="serviceInterface"
+                  value="com.jnshu.service.CacheUtil"/>
+        <property name="registryPort" value="8083"/>
+        <property name="servicePort" value="8089"/>
+    </bean>
+
+
+
+
+
+
+
+
+</beans>

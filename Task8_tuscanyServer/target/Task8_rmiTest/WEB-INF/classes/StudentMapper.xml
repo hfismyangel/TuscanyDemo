@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jnshu.dao.StudentDAO">
+	<!-- select查询语句，定义接口方法，输入值类型，输出值类型 -->
+	<!-- 有日志的memcache配置<cache type="org.mybatis.caches.memcached.LoggingMemcachedCache" />-->
+	<select id="countStudent"  resultType="int">
+		SELECT COUNT(*) FROM student;
+	</select>
+	<resultMap id="StudentMap" type="com.jnshu.pojo.Student">
+		<id column="id" property="id"></id>
+		<result column="name" property="name"></result>
+		<result column="qq" property="qq"></result>
+		<result column="type" property="type"></result>
+		<result column="graduateschool" property="graduateschool"></result>
+		<result column="dailynote" property="dailynote"></result>
+		<result column="wish" property="wish"></result>
+		<result column="referee" property="referee"></result>
+		<result column="knowwhere" property="knowwhere"></result>
+	</resultMap>
+	<select id="queryAllStudent" resultMap="StudentMap" parameterType="String">
+		SELECT * FROM student WHERE id LIKE #{id}
+	</select>
+</mapper>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+
+    <context:property-placeholder location="classpath:db.properties" ignore-unresolvable="true"/>
+
+    <!-- 配置数据源 -->
+
+    <bean id="jdbcDataSource" class="com.alibaba.druid.pool.DruidDataSource"
+          destroy-method="close">
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="maxActive" value="10"/>
+        <property name="minIdle" value="5"/>
+    </bean>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="jdbcDataSource"/>
+        <property name="configLocation" value="classpath:Configure.xml"></property>
+    </bean>
+    <!-- 手写配置sqlsessionBean。Mybatis-Spring是mybatis提供的与spring整合的类 使用下面的方法注册映射接口，
+            有一个接口就需要注册一下，此时也可使用MapperScannerConfigrer,
+        Mybatis-Spring会自动为我们自动扫描注册Mapper对应的MapperFactoryBean对象
+    <bean id="StudentDAO" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.jnshu.dao.StudentDAO"></property>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+    </bean>
+    <bean id="DeveloperDAO" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.jnshu.dao.DeveloperDAO"></property>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+    </bean>-->
+
+    <!-- 注解方式配置。MapperScannerConfigrer开启注解自动扫描并指定扫描包，使用spring和mybatis的整合包 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.jnshu.dao" />
+    </bean>
+</beans>

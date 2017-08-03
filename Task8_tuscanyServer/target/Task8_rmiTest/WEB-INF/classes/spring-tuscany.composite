@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<composite
+        xmlns="http://www.osoa.org/xmlns/sca/1.0"
+        xmlns:tuscany="http://tuscany.apache.org/xmlns/sca/1.0"
+        targetNamespace="http://calc"
+        xmlns:c="http://calc"
+        name="StudentService">
+    <component name="StudentServiceComponent">
+        <implementation.java location="com.jnshu.serviceImpl.StudentServiceImpl" />
+        <service name= "StudentService">
+            <tuscany:binding.rmi uri="rmi://localhost:8031/StudentService" />
+        </service>
+    </component >
+</composite>

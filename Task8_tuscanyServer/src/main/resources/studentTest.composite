@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<composite
+        xmlns="http://www.osoa.org/xmlns/sca/1.0"
+        xmlns:tuscany="http://tuscany.apache.org/xmlns/sca/1.0"
+        targetNamespace="http://calc"
+        xmlns:c="http://calc"
+        name="Calculator" >
+    <component name="CalculatorServiceComponent">
+        <implementation.java class="com.jnshu.serviceImpl.IserviceTestImpl" />
+        <reference name="add" target="AddComponent"/>
+    </component>
+    <component name="AddComponent">
+        <implementation.java class="com.jnshu.serviceImpl.StudentServiceImpl" />
+    </component>
+</composite>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jnshu.dao.DeveloperDAO">
+    <!-- <cache type="org.mybatis.caches.memcached.LoggingMemcachedCache" />-->
+    <resultMap id="DeveloperList" type="Developer">
+        <id column="id" property="id"></id>
+        <result column="type" property="type"></result>
+        <result column="description" property="description"></result>
+        <result column="needed" property="needed"></result>
+        <result column="growup" property="growup"></result>
+        <result column="pay0_1" property="pay0_1"></result>
+        <result column="pay1_3" property="pay1_3"></result>
+        <result column="pay3_5" property="pay3_5"></result>
+        <result column="studypeople" property="studypeople"></result>
+        <result column="tag" property="tag"></result>
+        <result column="introduce" property="introduce"></result>
+        <result column="create_at" property="create_at"></result>
+    </resultMap>
+    <select id="queryDeveloper" resultMap="DeveloperList" parameterType="String">
+        SELECT * FROM developer where id LIKE #{id}
+    </select>
+</mapper>

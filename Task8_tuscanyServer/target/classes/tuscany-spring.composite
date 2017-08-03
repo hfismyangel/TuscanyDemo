@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+           xmlns:tuscany="http://tuscany.apache.org/xmlns/sca/1.1"
+           targetNamespace="http://sample"
+           xmlns:sample="http://sample"
+           xmlns:scallop="http://scallop/xmlns/sca/1.1"
+           name="Calculator">
+
+    <!-- 对外接口 访问地址:http://localhost:8080/echoComponent?wsdl-->
+
+    <service name="studentService" promote="studentServiceComponent">
+
+        <interface.java interface="com.jnshu.service.StudentService"></interface.java>
+
+        <binding.ws uri="http://localhost:8080/studentServiceComponent"></binding.ws>
+        <reference name="add" target="studentServiceComponent"/>
+    </service>
+
+    <!--组件声明 -->
+
+    <component name="studentServiceComponent">
+
+        <implementation.java class="com.jnshu.serviceImpl.StudentServiceImpl"></implementation.java>
+
+    </component>
+
+</composite>

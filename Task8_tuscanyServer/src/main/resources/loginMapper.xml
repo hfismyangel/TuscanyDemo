@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jnshu.dao.LoginDAO">
+    <select id="queryUser" parameterType="String" resultType="String">
+        SELECT password FROM login WHERE username=#{username};
+    </select>
+    <select id="queryUid" parameterType="String" resultType="String">
+        SELECT uid FROM  login WHERE username=#{username}
+    </select>
+    <select id="matchUidAndTime" parameterType="String" resultType="Long">
+        SELECT  login_at FROM login WHERE uid=#{uid};
+    </select>
+    <update id="insertUpdateTime" parameterType="java.util.Map">
+        update login set login_at=#{loginTime} WHERE uid=#{uid};
+    </update>
+    <update id="insertPhoto" parameterType="java.util.Map">
+        UPDATE login set headpic=#{pic} WHERE uid=#{uuid};
+    </update>
+    <select id="selectPic" parameterType="String" resultType="String">
+        SELECT headpic FROM login WHERE username=#{username};
+    </select>
+
+    <!-- 对于所有可能为空的列，需要jdbc Type-->
+    <resultMap id="userMap" type="com.jnshu.pojo.User">
+        <id column="id" property="id" jdbcType="BIGINT" ></id>
+        <result column="username" property="userName"></result>
+        <result column="password" property="password"></result>
+        <result column="telephone" property="telephone"></result>
+        <result column="email" property="email"></result>
+        <result column="headpic" property="headpic" jdbcType="VARCHAR"></result>
+        <result column="uid" property="uid"></result>
+        <result column="login_at" property="login_at"></result>
+        <result column="create_at" property="create_at"></result>
+        <result column="update_at" property="update_at" jdbcType="BIGINT"></result>
+    </resultMap>
+    <insert id="insertUser" parameterType="User" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO login(id,username,password,telephone,email,headpic,uid,login_at,create_at,update_at)values(#{id},#{userName},#{password},#{telephone},#{email},#{headpic},#{uid},#{login_at},unix_timestamp(now()),#{update_at});
+    </insert>
+    
+</mapper>
